@@ -9,7 +9,7 @@ export function CountUp({ to, ms = 1100 }: { to: number; ms?: number }) {
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!el) return;
     setN(0);
     let raf = 0;
     const io = new IntersectionObserver(

@@ -47,13 +47,12 @@ export function MapaLoja({ rotaHref }: { rotaHref: string }) {
         io.disconnect();
         const maplibregl = (await import("maplibre-gl")).default;
         if (cancelado) return;
-        const calmo = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const toque = window.matchMedia("(pointer: coarse)").matches;
         const map = new maplibregl.Map({
           container: el,
           style: ESTILO,
           center: LOJA_COORD,
-          zoom: calmo ? 16 : 12.5,
+          zoom: 12.5,
           scrollZoom: false,
           dragRotate: false,
           pitchWithRotate: false,
@@ -91,7 +90,7 @@ export function MapaLoja({ rotaHref }: { rotaHref: string }) {
         map.once("load", () => {
           setPronto(true);
           // Chega na loja voando, com um pouco de inclinação.
-          if (!calmo) map.flyTo({ center: LOJA_COORD, zoom: 16.2, pitch: 40, bearing: -12, duration: 3200, essential: true });
+          map.flyTo({ center: LOJA_COORD, zoom: 16.2, pitch: 40, bearing: -12, duration: 3200, essential: true });
         });
       },
       { rootMargin: "200px" },
@@ -136,7 +135,6 @@ export function MapaLoja({ rotaHref }: { rotaHref: string }) {
 .pino__onda{position:absolute;left:50%;bottom:-8px;width:20px;height:8px;margin-left:-10px;border-radius:50%;border:2px solid ${VOLT};animation:pino-onda 2.4s ease-out infinite;opacity:0}
 .pino__onda--2{animation-delay:1.2s}
 @keyframes pino-onda{0%{transform:scale(1);opacity:.9}100%{transform:scale(6);opacity:0}}
-@media (prefers-reduced-motion:reduce){.pino__onda{animation:none}}
 .maplibregl-ctrl-group{border-radius:12px!important;overflow:hidden;background:#0b0b0b!important;box-shadow:none!important;border:1px solid rgba(255,255,255,.12)}
 .maplibregl-ctrl-group button{width:38px!important;height:38px!important;background:#0b0b0b!important}
 .maplibregl-ctrl-group button+button{border-top:1px solid rgba(255,255,255,.12)!important}

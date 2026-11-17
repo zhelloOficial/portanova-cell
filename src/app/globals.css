@@ -266,20 +266,12 @@
   }
 }
 
-/* Movimento reduzido: as entradas ficam (curtas), o que se mexe sem parar para. */
+/*
+ * Movimento reduzido: só o rolar suave sai. O Windows com "efeitos de animação" desligado
+ * também liga essa preferência, e lá a página ficava toda parada (fita e avaliações sem andar).
+ */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .animate-marquee,
-  .animate-marquee-back,
-  .animate-float,
-  .animate-glow,
-  .shine::after {
-    animation: none !important;
-  }
-  .js .reveal {
-    transform: none;
-    transition-duration: 0.4s;
   }
 }
