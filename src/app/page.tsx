@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { Arrow, Chat, Clock, Pin, Quote, Shield, Star, WhatsApp } from "@/components/icons";
+import { CountUp } from "@/components/CountUp";
+import { Parallax } from "@/components/Parallax";
 import { AVALIACOES, COMO_CHEGAR, ENDERECO, HORARIOS, INSTAGRAM, MAPA_EMBED, OFERTAS, WHATSAPP } from "@/lib/loja";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
@@ -59,48 +61,63 @@ function Hero() {
       {/* Luz amarela atrás dos aparelhos, como na foto. */}
       <div aria-hidden className="animate-glow pointer-events-none absolute top-[8%] right-[-10%] size-[720px] rounded-full bg-[radial-gradient(circle,oklch(96.7%_0.185_109/0.16),transparent_62%)]" />
       <div className={`${wrap} relative grid items-center gap-6 pt-10 pb-8 lg:grid-cols-[0.95fr_1.2fr] lg:gap-4 lg:pt-6`}>
-        <div className="animate-rise relative z-10">
-          <p className="flex items-center gap-2.5 text-[11px] font-bold tracking-[0.08em] uppercase">
-            <span className="size-1.5 rounded-full bg-volt shadow-[0_0_12px_var(--color-volt)]" />
+        <div className="relative z-10">
+          <p className="animate-rise flex items-center gap-2.5 text-[11px] font-bold tracking-[0.08em] uppercase">
+            <span className="relative flex size-1.5">
+              <span className="absolute inset-0 animate-ping rounded-full bg-volt" />
+              <span className="size-1.5 rounded-full bg-volt" />
+            </span>
             A Black Friday chegou à Portanova Cell
           </p>
           <h1 className="font-display mt-6 text-[clamp(5rem,13vw,8.75rem)] leading-[0.82] font-black tracking-[-0.01em] uppercase">
-            Black
-            <span className="block text-volt">Friday</span>
+            <span className="block overflow-hidden pb-[0.04em]">
+              <span className="animate-line" style={{ animationDelay: "0.1s" }}>Black</span>
+            </span>
+            <span className="block overflow-hidden pb-[0.04em]">
+              <span className="animate-line text-volt" style={{ animationDelay: "0.22s" }}>Friday</span>
+            </span>
           </h1>
-          <p className="mt-8 max-w-[25rem] text-[17px] leading-relaxed font-semibold">
-            Assistência especializada para seu celular. E o seu próximo aparelho também está aqui.
-          </p>
-          <p className="mt-4 max-w-[25rem] text-[15px] leading-relaxed text-mute">
-            Aproveite <strong className="font-extrabold text-volt">10%</strong> de desconto em ofertas selecionadas de celulares e acessórios.
-          </p>
-          <a href={WHATSAPP} {...ext} className="btn-volt mt-9 w-full shadow-[0_0_40px_-8px_var(--color-volt)] sm:w-auto">
-            Quero meus <span className="font-display text-[19px] leading-none font-extrabold">10%</span> de desconto
-            <Arrow />
-          </a>
-          <p className="mt-4 flex items-center gap-2 text-[12px] text-mute">
-            <Chat className="size-3.5" /> Atendimento direto pelo WhatsApp.
-          </p>
+          <div className="animate-rise" style={{ animationDelay: "0.45s" }}>
+            <p className="mt-8 max-w-[25rem] text-[17px] leading-relaxed font-semibold">
+              Assistência especializada para seu celular. E o seu próximo aparelho também está aqui.
+            </p>
+            <p className="mt-4 max-w-[25rem] text-[15px] leading-relaxed text-mute">
+              Aproveite <strong className="font-extrabold text-volt">10%</strong> de desconto em ofertas selecionadas de celulares e acessórios.
+            </p>
+          </div>
+          <div className="animate-rise" style={{ animationDelay: "0.6s" }}>
+            <a href={WHATSAPP} {...ext} className="btn-volt shine mt-9 w-full shadow-[0_0_40px_-8px_var(--color-volt)] sm:w-auto">
+              Quero meus <span className="font-display text-[19px] leading-none font-extrabold">10%</span> de desconto
+              <Arrow />
+            </a>
+            <p className="mt-4 flex items-center gap-2 text-[12px] text-mute">
+              <Chat className="size-3.5" /> Atendimento direto pelo WhatsApp.
+            </p>
+          </div>
         </div>
-        <div className="@container relative -mx-4 aspect-[1.08/1] sm:mx-0 [mask-image:linear-gradient(90deg,transparent,#000_14%),linear-gradient(0deg,transparent,#000_10%)] [mask-composite:intersect]">
-          <Image
-            src="/img/portanova-hero.webp"
-            alt="Dois celulares pretos sobre uma pedra, um deles com 10% OFF na tela"
-            fill
-            priority
-            sizes="(min-width: 1024px) 680px, 100vw"
-            className="object-cover object-right"
-          />
-          {/* O 10% OFF aceso na tela do aparelho da frente. */}
-          <p
-            aria-hidden
-            className="font-display absolute top-[39%] left-[66%] origin-center rotate-[12deg] skew-y-[4deg] text-center leading-[0.85] font-black text-volt uppercase [text-shadow:0_0_18px_oklch(96.7%_0.185_109/0.7),0_0_44px_oklch(96.7%_0.185_109/0.35)]"
-          >
-            <span className="block text-[3.1cqw] tracking-[0.04em]">Selecionados</span>
-            <span className="block text-[11cqw]">10%</span>
-            <span className="block text-[7.5cqw]">OFF</span>
-          </p>
-        </div>
+        <Parallax className="animate-photo relative -mx-4 sm:mx-0">
+          {/* Segue o mouse de leve e flutua; o 10% OFF acende na tela do aparelho da frente. */}
+          <div className="transition-transform duration-500 ease-out [transform:translate3d(calc(var(--mx,0)*-14px),calc(var(--my,0)*-10px),0)]">
+            <div className="animate-float @container relative aspect-[1.08/1] [mask-image:linear-gradient(90deg,transparent,#000_14%),linear-gradient(0deg,transparent,#000_10%)] [mask-composite:intersect]">
+              <Image
+                src="/img/portanova-hero.webp"
+                alt="Dois celulares pretos sobre uma pedra, um deles com 10% OFF na tela"
+                fill
+                priority
+                sizes="(min-width: 1024px) 680px, 100vw"
+                className="object-cover object-right"
+              />
+              <p
+                aria-hidden
+                className="animate-neon font-display absolute top-[39%] left-[66%] origin-center rotate-[12deg] skew-y-[4deg] text-center leading-[0.85] font-black text-volt uppercase [text-shadow:0_0_18px_oklch(96.7%_0.185_109/0.7),0_0_44px_oklch(96.7%_0.185_109/0.35)]"
+              >
+                <span className="block text-[3.1cqw] tracking-[0.04em]">Selecionados</span>
+                <span className="block text-[11cqw]">10%</span>
+                <span className="block text-[7.5cqw]">OFF</span>
+              </p>
+            </div>
+          </div>
+        </Parallax>
       </div>
     </section>
   );
@@ -109,10 +126,10 @@ function Hero() {
 function Selos() {
   const box = "flex items-center gap-5 rounded-2xl border border-volt/45 bg-ink-2/70 px-6 py-5 transition-colors hover:border-volt";
   return (
-    <section className={`${wrap} grid gap-3 md:grid-cols-[1.1fr_1fr_1fr]`}>
+    <section className={`${wrap} stagger grid gap-3 md:grid-cols-[1.1fr_1fr_1fr]`}>
       <div className={`${box} reveal`}>
         <p className="font-display flex items-baseline gap-1 text-volt [text-shadow:0_0_24px_oklch(96.7%_0.185_109/0.45)]">
-          <span className="text-[52px] leading-none font-black">10%</span>
+          <span className="text-[52px] leading-none font-black"><CountUp to={10} />%</span>
           <span className="text-[22px] font-extrabold">OFF</span>
         </p>
         <div>
@@ -138,6 +155,37 @@ function Selos() {
   );
 }
 
+function Faixa() {
+  const itens = ["Black Friday", "10% OFF em ofertas selecionadas", "iPhones e Androids", "Assistência técnica", "Acessórios", "Atendimento pelo WhatsApp"];
+  const linha = (
+    <>
+      {itens.map((t) => (
+        <span key={t} className="flex items-center gap-6">
+          {t}
+          <span aria-hidden className="text-[0.7em]">✦</span>
+        </span>
+      ))}
+    </>
+  );
+  return (
+    <div aria-hidden className="relative my-14 h-[120px] overflow-hidden sm:my-16 sm:h-[140px]">
+      {/* Duas fitas cruzadas, uma amarela e uma preta, correndo em sentidos opostos. */}
+      <div className="absolute top-1/2 left-[-5%] w-[110%] -translate-y-1/2 rotate-[2.2deg] border-y border-white/10 bg-ink-3 py-3">
+        <div className="font-display animate-marquee-back flex w-max gap-6 text-[22px] font-extrabold tracking-wide text-white/50 uppercase">
+          {linha}
+          {linha}
+        </div>
+      </div>
+      <div className="absolute top-1/2 left-[-5%] w-[110%] -translate-y-1/2 -rotate-[2.2deg] bg-volt py-3 shadow-[0_10px_40px_-10px_oklch(96.7%_0.185_109/0.5)]">
+        <div className="font-display animate-marquee flex w-max gap-6 text-[22px] font-extrabold tracking-wide text-ink uppercase [animation-duration:40s]">
+          {linha}
+          {linha}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Cartao({ id, titulo, texto, img, alt, className = "" }: { id?: string; titulo: string; texto: string; img: string; alt: string; className?: string }) {
   return (
     <a id={id} href={WHATSAPP} {...ext} className={`group reveal relative isolate flex min-h-[200px] flex-col justify-between overflow-hidden rounded-2xl border border-white/[0.08] bg-ink-2 p-6 ${className}`}>
@@ -156,12 +204,12 @@ function Cartao({ id, titulo, texto, img, alt, className = "" }: { id?: string; 
 
 function Especialidade() {
   return (
-    <section className={`${wrap} mt-4 grid gap-4 lg:grid-cols-2`}>
+    <section className={`${wrap} grid gap-4 lg:grid-cols-2`}>
       <div id="assistencia" className="reveal relative isolate flex flex-col overflow-hidden rounded-2xl bg-ink-2 lg:min-h-[400px] lg:flex-row">
         <div className="relative aspect-[16/10] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:w-[64%]">
           <Image src="/img/portanova-assistencia.webp" alt="Celular aberto na bancada de assistência técnica" fill sizes="(min-width: 1024px) 380px, 100vw" className="object-cover" />
         </div>
-        <div className="relative bg-volt px-7 py-8 text-ink lg:w-[62%] lg:[clip-path:polygon(0_0,100%_0,72%_100%,0_100%)] lg:py-9 lg:pr-24">
+        <div className="panel-reveal relative bg-volt px-7 py-8 text-ink lg:w-[62%] lg:[clip-path:polygon(0_0,100%_0,72%_100%,0_100%)] lg:py-9 lg:pr-24">
           <p className="text-[11px] font-extrabold tracking-[0.1em] uppercase">Nossa especialidade</p>
           <h2 className="font-display mt-4 text-[clamp(3rem,6vw,3.6rem)] leading-[0.88] font-black uppercase">
             Seu cell
@@ -178,7 +226,7 @@ function Especialidade() {
           </a>
         </div>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="stagger grid gap-4 sm:grid-cols-2">
         <Cartao
           titulo="iPhones e Androids"
           texto="Seu próximo celular está aqui. Consulte os modelos disponíveis e as ofertas da Black Friday."
@@ -226,7 +274,7 @@ function Ofertas() {
           Consultar todas as ofertas <Arrow />
         </a>
       </div>
-      <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+      <div className="stagger mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {OFERTAS.map((o) => (
           <article key={o.titulo} className="group reveal flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-ink-2 transition-colors hover:border-volt/50">
             <div className="relative aspect-square overflow-hidden">
@@ -264,7 +312,7 @@ function Avaliacoes() {
       <div className="mt-10 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_6%,#000_94%,transparent)]">
         <ul className="animate-marquee flex w-max gap-4 px-2">
           {fila.map((a, i) => (
-            <li key={i} aria-hidden={i >= AVALIACOES.length} className="flex w-[300px] shrink-0 flex-col rounded-2xl border border-white/[0.08] bg-ink-2 p-6 sm:w-[380px]">
+            <li key={i} aria-hidden={i >= AVALIACOES.length} className="flex w-[300px] shrink-0 flex-col rounded-2xl border border-white/[0.08] bg-ink-2 p-6 transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-volt/50 sm:w-[380px]">
               <div className="flex items-center justify-between">
                 <Quote className="size-7 text-volt" />
                 <span className="flex gap-0.5 text-volt">
@@ -324,7 +372,7 @@ function Loja() {
             src={MAPA_EMBED}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            className="h-full min-h-[340px] w-full [filter:grayscale(1)_invert(0.92)_contrast(0.9)]"
+            className="h-full min-h-[340px] w-full"
           />
         </div>
       </div>
@@ -345,7 +393,7 @@ function Final() {
         <p className="mx-auto mt-6 max-w-[26rem] text-[14px] leading-relaxed text-mute">
           Aproveite as condições especiais da Black Friday e descubra o que a Portanova Cell preparou para você.
         </p>
-        <a href={WHATSAPP} {...ext} className="btn-volt mt-9 shadow-[0_0_40px_-8px_var(--color-volt)]">
+        <a href={WHATSAPP} {...ext} className="btn-volt shine mt-9 shadow-[0_0_40px_-8px_var(--color-volt)]">
           Falar com um especialista <Arrow />
         </a>
       </div>
@@ -388,6 +436,7 @@ export default function Home() {
       <main>
         <Hero />
         <Selos />
+        <Faixa />
         <Especialidade />
         <Cabos />
         <Ofertas />

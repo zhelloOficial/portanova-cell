@@ -122,6 +122,143 @@
   animation: glow 5s ease-in-out infinite;
 }
 
+/* Linha do título sobe de dentro de uma máscara. */
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: none;
+  }
+}
+@utility animate-line {
+  display: block;
+  animation: line-up 0.9s cubic-bezier(0.2, 0.9, 0.1, 1) both;
+}
+
+/* Foto do topo entra da direita e depois flutua devagar. */
+@keyframes photo-in {
+  from {
+    opacity: 0;
+    transform: translateX(40px) scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@utility animate-photo {
+  animation: photo-in 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both;
+}
+@utility animate-float {
+  animation: float 6s ease-in-out 1.4s infinite;
+}
+
+/* 10% OFF da tela acende piscando como letreiro e fica respirando. */
+@keyframes neon-on {
+  0%,
+  18%,
+  22%,
+  34%,
+  38% {
+    opacity: 0;
+  }
+  20%,
+  36%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes neon-breathe {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.25);
+  }
+}
+@utility animate-neon {
+  animation:
+    neon-on 1.4s linear 1s both,
+    neon-breathe 3.2s ease-in-out 2.4s infinite;
+}
+
+/* Brilho que atravessa o botão principal de tempos em tempos. */
+@keyframes shine {
+  0%,
+  70% {
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-20deg);
+  }
+}
+@utility shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    z-index: -1;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.7), transparent);
+    animation: shine 4.5s ease-in-out 2s infinite;
+  }
+}
+
+@keyframes marquee-back {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: none;
+  }
+}
+@utility animate-marquee-back {
+  animation: marquee-back 50s linear infinite;
+}
+
+/* Painel amarelo da assistência corta a foto na diagonal ao aparecer. */
+@keyframes panel-in {
+  from {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 72% 100%, 0 100%);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .stagger > :nth-child(2) {
+    animation-range: entry 6% entry 46%;
+  }
+  .stagger > :nth-child(3) {
+    animation-range: entry 12% entry 52%;
+  }
+  .stagger > :nth-child(4) {
+    animation-range: entry 18% entry 58%;
+  }
+  @media (min-width: 1024px) {
+    .panel-reveal {
+      animation: panel-in linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 35%;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -129,6 +266,13 @@
   .animate-marquee,
   .animate-rise,
   .animate-glow,
+  .animate-line,
+  .animate-photo,
+  .animate-float,
+  .animate-neon,
+  .animate-marquee-back,
+  .panel-reveal,
+  .shine::after,
   .reveal {
     animation: none !important;
   }
