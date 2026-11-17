@@ -5,11 +5,12 @@ const csp = [
   // `unsafe-eval` só no dev: o React usa pra montar a pilha de erro; em produção nunca.
   `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "production" ? "" : " 'unsafe-eval'"}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data:",
+  "img-src 'self' data: blob:",
   "font-src 'self'",
-  "connect-src 'self'",
-  // Mapa da loja (embed do Google Maps).
-  "frame-src https://www.google.com https://maps.google.com",
+  // Mapa da loja: MapLibre baixa estilo, tiles e fontes da OpenFreeMap e roda em worker.
+  "connect-src 'self' https://tiles.openfreemap.org",
+  "worker-src 'self' blob:",
+  "child-src blob:",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",

@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { Arrow, Chat, Clock, Pin, Quote, Shield, Star, WhatsApp } from "@/components/icons";
+import { MapaLoja } from "@/components/MapaLoja";
 import { CountUp } from "@/components/CountUp";
 import { Parallax } from "@/components/Parallax";
-import { AVALIACOES, COMO_CHEGAR, ENDERECO, HORARIOS, INSTAGRAM, MAPA_EMBED, OFERTAS, WHATSAPP } from "@/lib/loja";
+import { AVALIACOES, COMO_CHEGAR, ENDERECO, HORARIOS, INSTAGRAM, OFERTAS, WHATSAPP } from "@/lib/loja";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 const wrap = "mx-auto w-full max-w-[1216px] px-4 sm:px-6";
@@ -86,7 +87,7 @@ function Hero() {
             </p>
           </div>
           <div className="animate-rise" style={{ animationDelay: "0.6s" }}>
-            <a href={WHATSAPP} {...ext} className="btn-volt shine mt-9 w-full shadow-[0_0_40px_-8px_var(--color-volt)] sm:w-auto">
+            <a href={WHATSAPP} {...ext} className="btn-volt shine mt-9 w-full shadow-[0_10px_28px_-16px_oklch(96.7%_0.185_109/0.5)] sm:w-auto">
               Quero meus <span className="font-display text-[19px] leading-none font-extrabold">10%</span> de desconto
               <Arrow />
             </a>
@@ -333,7 +334,7 @@ function Avaliacoes() {
 function Loja() {
   return (
     <section className={`${wrap} pt-28`}>
-      <div className="grid items-stretch gap-10 border-t border-white/[0.08] pt-16 lg:grid-cols-2">
+      <div className="grid items-center gap-10 border-t border-white/[0.08] pt-16 lg:grid-cols-2">
         <div className="reveal">
           <p className="eyebrow">Venha nos conhecer</p>
           <h2 className="mt-4 text-[clamp(2rem,4vw,2.5rem)] leading-[1.08] font-extrabold tracking-tight">Estamos pertinho de você!</h2>
@@ -366,14 +367,8 @@ function Loja() {
             </a>
           </div>
         </div>
-        <div className="reveal min-h-[340px] overflow-hidden rounded-2xl border border-volt/45">
-          <iframe
-            title="Mapa da Portanova Cell"
-            src={MAPA_EMBED}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="h-full min-h-[340px] w-full"
-          />
+        <div className="reveal">
+          <MapaLoja rotaHref={COMO_CHEGAR} />
         </div>
       </div>
     </section>
@@ -393,7 +388,7 @@ function Final() {
         <p className="mx-auto mt-6 max-w-[26rem] text-[14px] leading-relaxed text-mute">
           Aproveite as condições especiais da Black Friday e descubra o que a Portanova Cell preparou para você.
         </p>
-        <a href={WHATSAPP} {...ext} className="btn-volt shine mt-9 shadow-[0_0_40px_-8px_var(--color-volt)]">
+        <a href={WHATSAPP} {...ext} className="btn-volt shine mt-9 shadow-[0_10px_28px_-16px_oklch(96.7%_0.185_109/0.5)]">
           Falar com um especialista <Arrow />
         </a>
       </div>

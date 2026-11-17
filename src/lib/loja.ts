@@ -1,7 +1,8 @@
 export const WHATSAPP = "https://wa.me/message/WSIKJNLKGFWGI1";
 export const INSTAGRAM = "https://www.instagram.com/portanovacell/";
 export const ENDERECO = "Av. Brasília, 6759 - Sl 2 - Novo Mundo, Curitiba - PR, 81020-010";
-export const MAPA_EMBED = `https://www.google.com/maps?q=${encodeURIComponent(ENDERECO)}&output=embed`;
+/** Av. Brasília, 6759 (Centro Comercial Avenida Brasília), pelo OpenStreetMap. [lng, lat] */
+export const LOJA_COORD: [number, number] = [-49.2775089, -25.4949243];
 export const COMO_CHEGAR = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(ENDERECO)}`;
 
 export const HORARIOS = [

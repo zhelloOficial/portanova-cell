@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Manrope } from "next/font/google";
+import { Revelar } from "@/components/Revelar";
 import "./globals.css";
 
 const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"], variable: "--font-manrope", display: "swap" });
@@ -27,8 +28,15 @@ export const viewport: Viewport = { themeColor: "#050505", width: "device-width"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${manrope.variable} ${barlow.variable}`}>
-      <body>{children}</body>
+    <html lang="pt-BR" className={`${manrope.variable} ${barlow.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Marca que tem JS antes de pintar: só aí os blocos começam escondidos pra entrar ao rolar. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
+      <body>
+        {children}
+        <Revelar />
+      </body>
     </html>
   );
 }
